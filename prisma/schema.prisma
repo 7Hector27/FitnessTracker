@@ -12,11 +12,14 @@ datasource db {
 }
 
 model User {
-  id                String          @id @default(uuid())
+  id                String           @id @default(uuid())
   name              String
+  email             String
   password          String
-  WorkoutSchedule   WorkoutSchedule @relation(fields: [workoutScheduleId], references: [id])
-  workoutScheduleId String          @unique
+  WorkoutSchedule   WorkoutSchedule? @relation(fields: [workoutScheduleId], references: [id])
+  workoutScheduleId String?          @unique
+
+  @@unique([email])
 }
 
 model WorkoutSchedule {
@@ -31,6 +34,8 @@ model day {
   WorkoutSchedule   WorkoutSchedule? @relation(fields: [workoutScheduleId], references: [id])
   workoutScheduleId String?
   workouts          Workout[]
+  sets              Int?
+  reps              Int?
 }
 
 model Workout {
