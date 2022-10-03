@@ -33,7 +33,7 @@ const signup = async (req: NextApiRequest, res: NextApiResponse) => {
       data: {
         firstName,
         lastName,
-        email,
+        email: email.toLowerCase(),
         password: bcrypt.hashSync(password, salt),
       },
     });

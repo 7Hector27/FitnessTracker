@@ -10,7 +10,7 @@ const signin = async (req: NextApiRequest, res: NextApiResponse) => {
     // Search DB to see if user exists or not
     const user = await prisma.user.findUnique({
       where: {
-        email: email,
+        email: email.toLowerCase(),
       },
     });
 
