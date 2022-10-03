@@ -8,7 +8,8 @@ const logout = async (req: NextApiRequest, res: NextApiResponse) => {
     }),
   ]);
 
-  res.send('logout');
-  res.end();
+  return res.status(200).json({
+    message: 'Successfully logged out',
+  });
 };
 export default logout;
