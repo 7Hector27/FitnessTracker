@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "day" ALTER COLUMN "reps" DROP NOT NULL,
-ALTER COLUMN "sets" DROP NOT NULL;

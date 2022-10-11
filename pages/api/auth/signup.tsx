@@ -12,7 +12,7 @@ const signup = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const existingUser = await prisma.user.findUnique({
       where: {
-        email: email,
+        email: email.toLowerCase(),
       },
     });
     // res.status(201).json({ error: false, msg: 'User Found Successfuly' });
@@ -35,9 +35,21 @@ const signup = async (req: NextApiRequest, res: NextApiResponse) => {
         lastName,
         email: email.toLowerCase(),
         password: bcrypt.hashSync(password, salt),
+        workoutSchedule: {
+          createMany: {
+            data: [
+              { dayoftheweek: 'Sunday' },
+              { dayoftheweek: 'Monday' },
+              { dayoftheweek: 'Tuesday' },
+              { dayoftheweek: 'Wednesday' },
+              { dayoftheweek: 'Thursday' },
+              { dayoftheweek: 'Friday' },
+              { dayoftheweek: 'Saturday' },
+            ],
+          },
+        },
       },
     });
-    res.json(newUser);
 
     const token = jwt.sign(
       { id: newUser.id, email: newUser.email, time: Date.now() },
@@ -47,7 +59,7 @@ const signup = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.setHeader(
       'Set-Cookie',
-      cookie.serialize('x-auth-token', token, {
+      cookie.serialize('AUTH_TOKEN', token, {
         httpOnly: true,
         maxAge: 8 * 60 * 60,
         path: '/',

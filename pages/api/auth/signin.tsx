@@ -47,7 +47,7 @@ const signin = async (req: NextApiRequest, res: NextApiResponse) => {
     // Set token in the Header/Cookies
     res.setHeader(
       'Set-Cookie',
-      cookie.serialize('x-auth-token', token, {
+      cookie.serialize('AUTH_TOKEN', token, {
         httpOnly: true,
         maxAge: 8 * 60 * 60,
         path: '/',

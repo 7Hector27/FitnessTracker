@@ -22,7 +22,6 @@ const Home: NextPage = () => {
         email: email,
         password: password,
       });
-      console.log(u);
       router.push('./Home ');
     } else {
       const u = await axios.post('/api/auth/signup', {
@@ -31,13 +30,12 @@ const Home: NextPage = () => {
         email: email,
         password: password,
       });
-      console.log(u);
       router.push('./Home');
     }
   };
   return (
     <>
-      <div style={{ margin: '200px', backgroundColor: 'teal', padding: '5px' }}>
+      <div style={{ margin: '100px', backgroundColor: 'teal', padding: '5px' }}>
         <div style={{ float: 'right' }}>
           <button
             onClick={() => setUpInBoolean(false)}

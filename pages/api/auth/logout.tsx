@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import cookie from 'cookie';
 const logout = async (req: NextApiRequest, res: NextApiResponse) => {
   res.setHeader('Set-Cookie', [
-    cookie.serialize('x-auth-token', '', {
+    cookie.serialize('AUTH_TOKEN', '', {
       maxAge: -1,
       path: '/',
     }),

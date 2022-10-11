@@ -11,51 +11,54 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-model User {
-  id                String           @id @default(uuid())
-  firstName         String
-  lastName          String
-  email             String
-  password          String
-  WorkoutSchedule   WorkoutSchedule? @relation(fields: [workoutScheduleId], references: [id])
-  workoutScheduleId String?          @unique
+model user {
+  id              String @id @default(uuid())
+  firstName       String
+  lastName        String
+  email           String
+  password        String
+  workoutSchedule day[]
 
   @@unique([email])
 }
 
-model WorkoutSchedule {
-  id   String @id @default(uuid())
-  User User?
-  days day[]
-}
-
 model day {
-  id                String           @id @default(uuid())
-  dayofTheWeek      dayofTheWeek
-  WorkoutSchedule   WorkoutSchedule? @relation(fields: [workoutScheduleId], references: [id])
-  workoutScheduleId String?
-  workouts          Workout[]
-  sets              Int?
-  reps              Int?
+  id           String       @id @default(uuid())
+  dayoftheweek dayoftheweek
+  user         user         @relation(fields: [userId], references: [id])
+  userId       String
+  workouts     workout[]
+
+  @@unique([id])
 }
 
-model Workout {
+model workout {
+  id        String  @id @default(uuid())
   bodyPart  String
   equipment String
   gifUrl    String
-  id        String  @id
   name      String
   target    String
   day       day?    @relation(fields: [dayId], references: [id])
   dayId     String?
+  sets      Int?
+  reps      Int?
+  time      Int?
 }
 
-enum dayofTheWeek {
-  MONDAY
-  TUESDAY
-  WEDNESDAY
-  THURSDAY
-  FRIDAY
-  SATURDAY
-  SUNDAY
+enum dayoftheweek {
+  Monday
+  Tuesday
+  Wednesday
+  Thursday
+  Friday
+  Saturday
+  Sunday
 }
+
+// model workoutSchedule {
+//   id     String @id @default(uuid())
+//   user   user   @relation(fields: [userId], references: [id])
+//   userId String @unique
+//   days   day[]
+// }
