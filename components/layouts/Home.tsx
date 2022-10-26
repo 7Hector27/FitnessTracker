@@ -10,17 +10,17 @@ const Home: NextPage<HomeProps> = ({ children }) => {
     <div
       style={{
         display: 'flex',
-
-        backgroundColor: 'lightblue',
-        width: '800px',
-        height: '800px',
+        backgroundColor: '#CBCBCB',
+        width: '1150px',
+        height: '850px',
         textAlign: 'center',
         marginRight: 'auto',
         marginLeft: 'auto',
         marginTop: '3rem',
+        overflowX: 'scroll',
       }}
     >
-      <div style={{ background: 'green', float: 'left' }}>
+      <div style={{ background: '#E8E8E8', width: '80px' }}>
         <NavBar />
       </div>
       <div>{children}</div>

@@ -1,6 +1,6 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
-import prisma from '../prisma';
+import { prisma } from '../prisma';
 
 interface JwtPayload {
   id: string;
@@ -15,7 +15,7 @@ export const validateRoute = (handler: NextApiHandler) => {
       return res.status(401).json({
         error: [
           {
-            message: `Unauthorized`,
+            message: `Unauthorized1`,
             code: 401,
           },
         ],
@@ -41,18 +41,19 @@ export const validateRoute = (handler: NextApiHandler) => {
         return res.status(401).json({
           error: [
             {
-              message: `Unauthorized`,
+              message: `Unauthorized2`,
               code: 401,
             },
           ],
         });
+        // might need a "return" here
       }
       return handler(req, res, user);
     } catch (error) {
       return res.status(401).json({
         error: [
           {
-            message: `Unauthorized`,
+            message: `Unauthorized3`,
             code: 401,
           },
         ],

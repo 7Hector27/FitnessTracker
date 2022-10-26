@@ -1,50 +1,70 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useAppDispatch } from '../redux/reduxHooks';
-import { setOptionUrl } from '../redux/workouts/workoutSlice';
+
 const WorkoutsPage = () => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
   return (
-    <>
+    <div style={{ margin: '100px 100px 100px 250px' }}>
       <div
-        onClick={() => {
-          router.push('/WorkoutOptions'),
-            dispatch(
-              setOptionUrl(
-                'https://exercisedb.p.rapidapi.com/exercises/targetList'
-              )
-            );
+        style={{
+          display: 'flex',
+          gap: '20px',
+          marginBottom: '20px',
         }}
       >
-        By Targeted Muscle
+        <div
+          style={{
+            width: '300px',
+            height: '300px',
+            backgroundColor: '#14193E',
+            color: 'white',
+          }}
+          onClick={() => {
+            router.push('/Workout/targetList');
+          }}
+        >
+          <h1>By Targeted Muscle</h1>
+        </div>
+        <div
+          style={{
+            width: '300px',
+            height: '300px',
+            backgroundColor: '#1F222A',
+            color: 'white',
+          }}
+          onClick={() => {
+            router.push('/Workout/equipmentList');
+          }}
+        >
+          <h1>By Equipment</h1>
+        </div>
       </div>
-      <div
-        onClick={() => {
-          router.push('/WorkoutOptions'),
-            dispatch(
-              setOptionUrl(
-                'https://exercisedb.p.rapidapi.com/exercises/equipmentList'
-              )
-            );
-        }}
-      >
-        By Equipment
+      <div style={{ display: 'flex', gap: '20px' }}>
+        <div
+          style={{
+            width: '300px',
+            height: '300px',
+            backgroundColor: '#1F222A',
+            color: 'white',
+          }}
+          onClick={() => {
+            router.push('/Workout/bodyPartList');
+          }}
+        >
+          <h1>By Body Part</h1>
+        </div>
+        <div
+          style={{
+            width: '300px',
+            height: '300px',
+            backgroundColor: '#14193E',
+            color: 'white',
+          }}
+        >
+          <h1>All Workouts</h1>
+        </div>
       </div>
-      <div
-        onClick={() => {
-          router.push('/WorkoutOptions'),
-            dispatch(
-              setOptionUrl(
-                'https://exercisedb.p.rapidapi.com/exercises/bodyPartList'
-              )
-            );
-        }}
-      >
-        By Body Part
-      </div>
-      <div>All Workouts</div>
-    </>
+    </div>
   );
 };
 
